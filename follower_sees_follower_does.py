@@ -116,6 +116,8 @@ try:
 
     print(">> Active. Running Sync Write Mode.")
 
+    last_print_time = time.time()
+    last_status_targets = list(follower_targets)
     while True:
         # Loop Variables
         update_needed = False
@@ -144,6 +146,27 @@ try:
         # 2. WRITE PHASE (One Packet for All)
         if update_needed:
             sync_write_positions(f_ser, FOLLOWER_IDS, follower_targets)
+
+        if time.time() - last_print_time >= 5.0:
+            print(f"\n--- STATUS ({time.strftime('%H:%M:%S')}) ---")
+
+            # Build the status string
+            for i in range(6):
+                fid = FOLLOWER_IDS[i]
+                current_pos = int(follower_targets[i])
+
+                # Calculate difference from 5 seconds ago
+                diff = current_pos - int(last_status_targets[i])
+
+                # Format nicely: "ID 6: 14500 (+200)"
+                sign = "+" if diff >= 0 else ""
+                print(f"ID {fid}: {current_pos:<6} ({sign}{diff})", end=" | ")
+
+            print("")
+
+            # Update history for next comparison
+            last_status_targets = list(follower_targets)
+            last_print_time = time.time()
 
         # Small delay not needed because read_robust acts as a throttle
         # but a tiny sleep yields CPU to USB driver
