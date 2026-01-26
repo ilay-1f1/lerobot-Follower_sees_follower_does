@@ -6,6 +6,9 @@ Equipment:
  - SO-101 leader arm with a control board
  - 2 * power suppliers (5V)
  - 2 * USB-C cables
+Prequisites:
+- Python
+- pyserial module
 
 The main script is follower_sees_follower_does.py. It should run as expected without special adjustments, but a few things must be set up in the code, while the two arms are connected to power and to computer:
 - Ports - check the port names of the two arms, and update them in the script
