@@ -1,11 +1,12 @@
 # lerobot-Follower_sees_follower_does
 
-This a setup for mimicking movement of S0-101 Leader arm (moved by hand) by the corresponding Follower arm.
+This a setup for mimicking movement of SO-101 Leader arm (moved by hand) by the corresponding Follower arm.
 Equipment:
  - SO-101 follower arm with a control board
  - SO-101 leader arm with a control board
  - 2 * power suppliers (5V)
  - 2 * USB-C cables
+
 Prequisites:
 - Python
 - pyserial module
